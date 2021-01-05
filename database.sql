@@ -10,3 +10,6 @@ CREATE TABLE "song" (
     "length" VARCHAR(10) NOT NULL,
     "released" date
 );
+
+INSERT INTO "artist" (name, birthdate)
+VALUES ('Ella Fitzgerald', '04-25-1917');
