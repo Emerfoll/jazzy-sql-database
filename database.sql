@@ -22,3 +22,5 @@ VALUES ('Take Five', '5:24', '1959-09-29'), ('So What', '9:22', '1959-08-17'),
 
 
 SELECT * FROM "song" ORDER BY "title";
+
+SELECT * FROM "artist" ORDER BY "birthdate" DESC;
