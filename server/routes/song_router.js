@@ -4,7 +4,6 @@ const pool = require('../modules/pools.js')
 
 
 router.get('/', (req, res) => {
-    // res.send(musicLibrary);
     // Send back everything in songs table.
     const queryText = `SELECT * FROM "song" ORDER BY "title";`;
     pool.query(queryText)
@@ -21,16 +20,15 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-    // musicLibrary.push(req.body);
+
     console.log(req.body);
     // Send body data to database.
-    const queryText = `INSERT INTO "Songs" ("rank", "track", "artist", "published")
-    VALUES ( $1, $2, $3, $4);`;
+    const queryText = `INSERT INTO "song" ("title", "length", "released")
+    VALUES ( $1, $2, $3);`;
 
-    pool.query(queryText, [req.body.rank, 
-                           req.body.track, 
-                           req.body.artist, 
-                           req.body.published
+    pool.query(queryText, [req.body.title, 
+                           req.body.length, 
+                           req.body.released
                         ])
         .then((result) => {
         console.log(result);
