@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
         console.log(error);
         res.sendStatus(500);
     });
-});// End of the ajax get handler.
+}); // End of the ajax get handler.
 
 // Handles ajax post requests for the server.
 router.post('/', (req, res) => {
@@ -36,6 +36,6 @@ router.post('/', (req, res) => {
         res.sendStatus(500);
     });
 
-});
+}); // End of the ajax post handler.
 
 module.exports = router;

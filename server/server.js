@@ -15,10 +15,6 @@ app.use('/song', songRouter);
 let artistRouter = require('./routes/artist_router.js')
 app.use('/artist', artistRouter);
 
-
 app.listen(PORT, () => {
     console.log('listening on port', PORT)
 });
-
-
-
