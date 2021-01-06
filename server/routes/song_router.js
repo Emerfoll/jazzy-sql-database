@@ -2,30 +2,26 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../modules/pools.js')
 
-
+// Handles ajax get requests for the server.
 router.get('/', (req, res) => {
-    // Send back everything in songs table.
-    const queryText = `SELECT * FROM "song" ORDER BY "title";`;
-    pool.query(queryText)
-        .then((result) => {
-            console.log(result);
+    // Starts a new query in the database and waits for the results to be sent to the client.
+    pool.query(`SELECT * FROM "song" ORDER BY "title";`).then((result) => {
+        console.log(result);
+        // Sends the information the client requested to the client.
+        res.send(result.rows);
+    }).catch((error) => { // Sends a message to the client if the database returns an error.
+        console.log(error);
+        res.sendStatus(500);
+    });
+});// End of the ajax get handler.
 
-            //result is huge, only care about rows
-            res.send(result.rows);
-        }).catch((error) => {
-            console.log(error);
-            res.sendStatus(500);
-        });
-
-});
-
+// Handles ajax post requests for the server.
 router.post('/', (req, res) => {
-
     console.log(req.body);
-    // Send body data to database.
+    // Cleans and sends info to the database to be inserted into the 'artist' table.
     const queryText = `INSERT INTO "song" ("title", "length", "released")
     VALUES ( $1, $2, $3);`;
-
+    // Info form the client to be sent and added to the database.
     pool.query(queryText, [
         req.body.title,
         req.body.length,
